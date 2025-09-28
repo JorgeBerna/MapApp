@@ -11,7 +11,7 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
         {children || (
           <div className="text-center">
             <p className="text-sm">
-              © 2024 MapApp - Explora el mundo y registra tus viajes
+              © 2025 MapApp - Explora el mundo y registra tus viajes
             </p>
             <div className="mt-2 flex justify-center space-x-6 text-xs">
               <span>Privacidad</span>

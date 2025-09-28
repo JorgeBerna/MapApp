@@ -38,29 +38,29 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route 
-              path="/map" 
+            <Route
+              path="/map"
               element={
                 <ProtectedRoute>
                   <Map />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/countries" 
+            <Route
+              path="/countries"
               element={
                 <ProtectedRoute>
                   <Countries />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/admin" 
+            <Route
+              path="/admin"
               element={
                 <AdminRoute>
                   <Admin />
                 </AdminRoute>
-              } 
+              }
             />
             <Route path="*" element={<Home />} />
           </Routes>
