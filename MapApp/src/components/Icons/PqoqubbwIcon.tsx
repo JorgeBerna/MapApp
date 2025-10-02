@@ -11,11 +11,13 @@ import {
   Search,
   MapPin,
   Info,
-  Tag
+  Tag,
+  CircleDollarSign,
+  Sparkles
 } from 'lucide-react';
 
 interface PqoqubbwIconProps {
-  name: 'globe' | 'flag' | 'hash' | 'building' | 'languages' | 'coins' | 'users' | 'search' | 'mapPin' | 'info' | 'tag';
+  name: 'globe' | 'flag' | 'hash' | 'building' | 'languages' | 'coins' | 'users' | 'search' | 'mapPin' | 'info' | 'tag' | 'circleDollarSign' | 'sparkles';
   className?: string;
   animate?: boolean;
 }
@@ -69,7 +71,9 @@ const PqoqubbwIcon: React.FC<PqoqubbwIconProps> = ({
     search: Search,
     mapPin: MapPin,
     info: Info,
-    tag: Tag
+    tag: Tag,
+    circleDollarSign: CircleDollarSign,
+    sparkles: Sparkles
   };
 
   const IconComponent = iconMap[name];

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../Services/AuthService';
 
@@ -7,6 +8,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
+  const intl = useIntl();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,12 +28,14 @@ const Login: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-black/20 backdrop-blur-sm rounded-lg p-8 border border-white/10 w-full max-w-md">
         <form onSubmit={handleLogin} className="space-y-6">
-          <h2 className="text-2xl font-bold text-white text-center mb-6">Iniciar Sesión</h2>
+          <h2 className="text-2xl font-bold text-white text-center mb-6">
+            <FormattedMessage id="auth.login.title" defaultMessage="Login" />
+          </h2>
           
           <div>
             <input
               type="email"
-              placeholder="Correo electrónico"
+              placeholder={intl.formatMessage({ id: 'auth.email', defaultMessage: 'Email' })}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -42,7 +46,7 @@ const Login: React.FC = () => {
           <div>
             <input
               type="password"
-              placeholder="Contraseña"
+              placeholder={intl.formatMessage({ id: 'auth.password', defaultMessage: 'Password' })}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -54,7 +58,7 @@ const Login: React.FC = () => {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent"
           >
-            Login
+            {intl.formatMessage({ id: 'auth.login.button', defaultMessage: 'Login' })}
           </button>
           
           {error && (
@@ -65,13 +69,13 @@ const Login: React.FC = () => {
           
           <div className="text-center">
             <p className="text-white/70">
-              ¿No tienes cuenta?{' '}
+              <FormattedMessage id="auth.noAccount" defaultMessage="Don't have an account?" />{' '}
               <button
                 type="button"
                 onClick={() => navigate('/register')}
                 className="text-blue-400 hover:text-blue-300 underline focus:outline-none"
               >
-                Registrarse
+                {intl.formatMessage({ id: 'auth.register.button', defaultMessage: 'Register' })}
               </button>
             </p>
           </div>

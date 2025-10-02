@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 interface FooterProps {
   children?: React.ReactNode;
@@ -11,12 +12,12 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
         {children || (
           <div className="text-center">
             <p className="text-sm">
-              © 2025 MapApp - Explora el mundo y registra tus viajes
+              <FormattedMessage id="footer.copyright" defaultMessage="© 2025 MapApp - Explora el mundo y registra tus viajes" />
             </p>
             <div className="mt-2 flex justify-center space-x-6 text-xs">
-              <span>Privacidad</span>
-              <span>Términos</span>
-              <span>Contacto</span>
+              <span><FormattedMessage id="footer.privacy" defaultMessage="Privacidad" /></span>
+              <span><FormattedMessage id="footer.terms" defaultMessage="Términos" /></span>
+              <span><FormattedMessage id="footer.contact" defaultMessage="Contacto" /></span>
             </div>
           </div>
         )}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../Services/AuthService';
 import { userService } from '../../Services/UserService';
@@ -9,6 +10,7 @@ const Register: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
   const navigate = useNavigate();
+  const intl = useIntl();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,12 +40,14 @@ const Register: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-black/20 backdrop-blur-sm rounded-lg p-8 border border-white/10 w-full max-w-md">
         <form onSubmit={handleRegister} className="space-y-6">
-          <h2 className="text-2xl font-bold text-white text-center mb-6">Registrarse</h2>
+          <h2 className="text-2xl font-bold text-white text-center mb-6">
+            <FormattedMessage id="auth.register.title" defaultMessage="Register" />
+          </h2>
           
           <div>
             <input
               type="email"
-              placeholder="Correo electrónico"
+              placeholder={intl.formatMessage({ id: 'auth.email', defaultMessage: 'Email' })}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -54,7 +58,7 @@ const Register: React.FC = () => {
           <div>
             <input
               type="password"
-              placeholder="Contraseña"
+              placeholder={intl.formatMessage({ id: 'auth.password', defaultMessage: 'Password' })}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -66,7 +70,7 @@ const Register: React.FC = () => {
             type="submit"
             className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-transparent"
           >
-            Registrarse
+            {intl.formatMessage({ id: 'auth.register.button', defaultMessage: 'Register' })}
           </button>
           
           {error && (
@@ -77,19 +81,19 @@ const Register: React.FC = () => {
           
           {success && (
             <p className="text-green-400 text-center text-sm bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-              {success}
+              {intl.formatMessage({ id: 'success.register', defaultMessage: 'Registration successful' })}
             </p>
           )}
           
           <div className="text-center">
             <p className="text-white/70">
-              ¿Ya tienes cuenta?{' '}
+              <FormattedMessage id="auth.alreadyHave" defaultMessage="Already have an account?" />{' '}
               <button
                 type="button"
                 onClick={() => navigate('/login')}
                 className="text-blue-400 hover:text-blue-300 underline focus:outline-none"
               >
-                Iniciar sesión
+                {intl.formatMessage({ id: 'auth.login.button', defaultMessage: 'Login' })}
               </button>
             </p>
           </div>

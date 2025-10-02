@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { countriesService } from '../../Services/CountriesService';
 import type { Country } from '../../Types/Country';
 import { PqoqubbwIcon } from '../../components/Icons';
@@ -12,6 +13,7 @@ const CountryList: React.FC<CountryListProps> = ({
     onCountrySelect,
     selectedCountryCode
 }) => {
+    const intl = useIntl();
     const [countries, setCountries] = useState<Country[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
@@ -82,7 +84,9 @@ const CountryList: React.FC<CountryListProps> = ({
         return (
             <div className="h-full flex flex-col">
                 <div className="p-4 border-b border-white/10">
-                    <h2 className="text-lg font-semibold text-white">Países</h2>
+                    <h2 className="text-lg font-semibold text-white">
+                        <FormattedMessage id="countries.title" defaultMessage="Países" />
+                    </h2>
                 </div>
                 <div className="flex-1 flex items-center justify-center p-4">
                     <div className="text-center">
@@ -91,13 +95,15 @@ const CountryList: React.FC<CountryListProps> = ({
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h3 className="text-lg font-medium text-white mb-2">Error al cargar países</h3>
+                        <h3 className="text-lg font-medium text-white mb-2">
+                            <FormattedMessage id="countries.loadError" defaultMessage="Error al cargar países" />
+                        </h3>
                         <p className="text-white/70 mb-4">{error}</p>
                         <button
                             onClick={loadCountries}
                             className="px-4 py-2 bg-blue-500/20 text-white border border-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors backdrop-blur-sm"
                         >
-                            Reintentar
+                            <FormattedMessage id="countries.retry" defaultMessage="Reintentar" />
                         </button>
                     </div>
                 </div>
@@ -110,7 +116,7 @@ const CountryList: React.FC<CountryListProps> = ({
 
             <div className="p-4 border-b border-white/10">
                 <h2 className="text-lg font-semibold text-white mb-3">
-                    Países ({filteredCountries.length})
+                    <FormattedMessage id="countries.count" defaultMessage="Países ({count})" values={{ count: filteredCountries.length }} />
                 </h2>
 
                 {/* Buscador */}
@@ -121,7 +127,7 @@ const CountryList: React.FC<CountryListProps> = ({
                     <input
                         type="text"
                         className="block w-full pl-10 pr-10 py-2 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 text-sm text-white placeholder-white/60 backdrop-blur-sm"
-                        placeholder="Buscar por nombre o código..."
+                        placeholder={intl.formatMessage({ id: 'countries.searchPlaceholder', defaultMessage: 'Buscar por nombre o código...' })}
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
@@ -147,12 +153,11 @@ const CountryList: React.FC<CountryListProps> = ({
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <h3 className="text-lg font-medium text-white mb-2">No se encontraron países</h3>
+                        <h3 className="text-lg font-medium text-white mb-2">
+                            <FormattedMessage id="countries.noResults" defaultMessage="No se encontraron países" />
+                        </h3>
                         <p className="text-white/70">
-                            {searchTerm
-                                ? `No hay países que coincidan con "${searchTerm}"`
-                                : 'No hay países disponibles'
-                            }
+                            <FormattedMessage id="countries.noResultsDescription" defaultMessage="Intenta con un término de búsqueda diferente o revisa la ortografía" />
                         </p>
                     </div>
                 ) : (

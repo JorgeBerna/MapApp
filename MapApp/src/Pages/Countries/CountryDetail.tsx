@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { countriesService } from '../../Services/CountriesService';
 import type { Country } from '../../Types/Country';
 import { PqoqubbwIcon } from '../../components/Icons';
@@ -46,17 +47,17 @@ const CountryDetail: React.FC<CountryDetailProps> = ({ country, loading = false 
                         </svg>
                     </div>
                     <h3 className="text-xl font-medium text-white mb-2">
-                        Selecciona un país
+                        <FormattedMessage id="countries.selectCountry" defaultMessage="Selecciona un país" />
                     </h3>
                     <p className="text-white/70">
-                        Haz clic en un país de la lista para ver su información detallada
+                        <FormattedMessage id="countries.selectDescription" defaultMessage="Haz clic en un país de la lista para ver su información detallada" />
                     </p>
                 </div>
             </div>
         );
     }
 
-    const InfoField: React.FC<{ label: string; value: string | number; icon?: React.ReactNode }> = ({
+    const InfoField: React.FC<{ label: React.ReactNode; value: React.ReactNode; icon?: React.ReactNode }> = ({
         label,
         value,
         icon
@@ -99,7 +100,7 @@ const CountryDetail: React.FC<CountryDetailProps> = ({ country, loading = false 
             <div className="p-6 border-b border-white/10">
                 <h2 className="text-lg font-semibold text-white mb-4 flex items-center">
                     <PqoqubbwIcon name="flag" className="w-5 h-5 mr-2 text-white/80" />
-                    Bandera
+                    <FormattedMessage id="countries.flag" defaultMessage="Bandera" />
                 </h2>
                 <div className="relative bg-white/5 rounded-lg overflow-hidden border border-white/20">
                     {country.flags && (country.flags.svg || country.flags.png) ? (
@@ -137,48 +138,48 @@ const CountryDetail: React.FC<CountryDetailProps> = ({ country, loading = false 
             <div className="p-6 space-y-6">
                 <h2 className="text-lg font-semibold text-white flex items-center border-b border-white/20 pb-2">
                     <PqoqubbwIcon name="info" className="w-5 h-5 mr-2 text-white/80" />
-                    Información General
+                    <FormattedMessage id="countries.generalInfo" defaultMessage="Información General" />
                 </h2>
 
                 <div className="grid grid-cols-1 gap-6">
                     <InfoField
-                        label="Nombre Común"
+                        label={<FormattedMessage id="countries.commonName" defaultMessage="Nombre Común" />}
                         value={country.name.common}
                         icon={<PqoqubbwIcon name="tag" className="w-4 h-4 text-blue-600" />}
                     />
 
                     <InfoField
-                        label="Nombre Oficial"
+                        label={<FormattedMessage id="countries.officialName" defaultMessage="Nombre Oficial" />}
                         value={country.name.official}
                         icon={<PqoqubbwIcon name="globe" className="w-4 h-4 text-green-600" />}
                     />
 
                     <InfoField
-                        label="Código"
+                        label={<FormattedMessage id="countries.code" defaultMessage="Código" />}
                         value={`${country.cca2} / ${country.cca3}`}
                         icon={<PqoqubbwIcon name="hash" className="w-4 h-4 text-purple-600" />}
                     />
 
                     <InfoField
-                        label="Capital"
-                        value={country.capital?.join(', ') || 'No disponible'}
+                        label={<FormattedMessage id="countries.capital" defaultMessage="Capital" />}
+                        value={country.capital?.join(', ') || <FormattedMessage id="countries.notAvailable" defaultMessage="No disponible" />}
                         icon={<PqoqubbwIcon name="building" className="w-4 h-4 text-red-600" />}
                     />
 
                     <InfoField
-                        label="Idiomas"
+                        label={<FormattedMessage id="countries.languages" defaultMessage="Idiomas" />}
                         value={countriesService.formatLanguages(country.languages)}
                         icon={<PqoqubbwIcon name="languages" className="w-4 h-4 text-yellow-600" />}
                     />
 
                     <InfoField
-                        label="Moneda"
+                        label={<FormattedMessage id="countries.currencies" defaultMessage="Moneda" />}
                         value={countriesService.formatCurrencies(country.currencies)}
                         icon={<PqoqubbwIcon name="coins" className="w-4 h-4 text-emerald-600" />}
                     />
 
                     <InfoField
-                        label="Población"
+                        label={<FormattedMessage id="countries.population" defaultMessage="Población" />}
                         value={countriesService.formatPopulation(country.population)}
                         icon={<PqoqubbwIcon name="users" className="w-4 h-4 text-indigo-600" />}
                     />

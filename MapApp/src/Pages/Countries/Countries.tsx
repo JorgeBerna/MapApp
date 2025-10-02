@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { FormattedMessage } from 'react-intl';
 import CountryList from './CountryList';
 import CountryDetail from './CountryDetail';
 import type { Country } from '../../Types/Country';
@@ -27,9 +28,11 @@ const Countries: React.FC = () => {
             {/* Header */}
             <div className="bg-black/20 backdrop-blur-sm border-b border-white/10">
                 <div className="px-6 py-4">
-                    <h1 className="text-2xl font-bold text-white">Países del Mundo</h1>
+                    <h1 className="text-2xl font-bold text-white">
+                        <FormattedMessage id="countries.worldTitle" defaultMessage="Países del Mundo" />
+                    </h1>
                     <p className="text-white/80 mt-1">
-                        Explora información detallada de todos los países
+                        <FormattedMessage id="countries.worldDescription" defaultMessage="Explora información detallada de todos los países" />
                     </p>
                 </div>
             </div>
