@@ -61,7 +61,7 @@ const Map: React.FC = () => {
   );
 
   type FilterType = "all" | "rated" | "unrated";
-  const [filter, setFilter] = useState<FilterType>("all");
+  const [filter] = useState<FilterType>("all");
 
   const filteredCount = useMemo(() => {
     if (!countries || countries.length === 0) return 0;
